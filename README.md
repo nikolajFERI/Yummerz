@@ -30,7 +30,7 @@
 <h3 align="center">Yummerz</h3>
 
   <p align="center">
-    Nothing yet
+    Projekt yummerz je aplikacija za pridobivanje prilagojenih receptov
     <br />
     <a href="https://github.com/nikolajFERI/Yummerz"><strong>Explore the docs »</strong></a>
     <br />
@@ -78,17 +78,68 @@ Projekt yummerz je aplikacija za pridobivanje prilagojenih receptov. Knjig/splet
 Tukaj se najina aplikacija razlikuje od ostalih. Uporabinik lahko v aplikacijo vnese sestavine katere ima trenutno na voljo, svoj stil življenja, ter svoje preference glede hrane.  Glede na vnešene podatke mu bo aplikacija prikazala recepte, ki zadostujejo njegovim potrebam. 
 
 ## Besednjak:
-Recept - navodila za pripravo hrane, vsak recept ima ključne "tag-e"
-tag- kategoričen opis hrane, naprimer "visoko beljakovinska/vlakninska", vegetarijanska, veganska, nizko kalorična
-sestavina - sestavni deli receptov, te uporabnik specificira
-stopnja kritičnosti sestavine:
-OSREDNJI DEL - ključno
-Opcijsko
-Dodatek
+- Recept - navodila za pripravo hrane, vsak recept ima ključne "tag-e"
+- tag- kategoričen opis hrane, naprimer "visoko beljakovinska/vlakninska", vegetarijanska, veganska, nizko kalorična
+- sestavina - sestavni deli receptov, te uporabnik specificira
+
+- Stopnja kritičnosti sestavine:
+	- OSREDNJI DEL - ključno
+	- Opcijsko
+	- Dodatek
 
 
-[NAREDI TREE]
+## Project layout
 
+```
+.
+└── Yummerz
+    ├── backend
+    │   ├── mvnw
+    │   ├── mvnw.cmd
+    │   ├── pom.xml
+    │   ├── src
+    │   │   ├── main
+    │   │   │   ├── java
+    │   │   │   │   └── com
+    │   │   │   │       └── yummerz
+    │   │   │   │           └── yummerz
+    │   │   │   │               ├── Recipe.java
+    │   │   │   │               ├── RecipeController.java
+    │   │   │   │               ├── RecipeRepository.java
+    │   │   │   │               ├── RecipeService.java
+    │   │   │   │               └── YummerzApplication.java
+    │   │   │   └── resources
+    │   │   │       └── application.properties
+    │   │   └── test
+    │   │       └── java
+    │   │           └── com
+    │   │               └── yummerz
+    │   │                   └── yummerz
+    │   │                       └── YummerzApplicationTests.java
+    │   └── yummerz.zip
+    ├── frontend
+    │   ├── bun.lock
+    │   ├── eslint.config.js
+    │   ├── package.json
+    │   ├── README.md
+    │   ├── src
+    │   │   ├── app.d.ts
+    │   │   ├── app.html
+    │   │   ├── lib
+    │   │   │   ├── assets
+    │   │   │   │   └── favicon.svg
+    │   │   │   └── index.ts
+    │   │   └── routes
+    │   │       ├── +layout.svelte
+    │   │       └── +page.svelte
+    │   ├── static
+    │   │   └── robots.txt
+    │   ├── svelte.config.js
+    │   ├── tsconfig.json
+    │   └── vite.config.ts
+    ├── LICENSE
+    └── README.md
+```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
