@@ -83,6 +83,12 @@
 - **Opcijsko** – sestavina, ki jo lahko nadomestimo ali izpustimo  
 - **Dodatek** – sestavina za izboljšanje okusa ali teksture, ni nujna
 
+### Stopnje stanja recepta
+- **Odobreno** – Recept je bil odobren
+- **V čakanju** – Recept čaka na odobritev
+- **Pomanjkljivo** – Moderator je ocenil da je recept preveč pomanjkljiv za objavo
+- **Zavrnjeno** – Moderator je recept zavrnil
+
 ---
 
 <!-- ## Vizija Projekta -->
