@@ -87,7 +87,7 @@
 
 <!-- ## Vizija Projekta -->
 
-Cilj projekta **Yummerz** je omogočiti uporabnikom enostavno in hitro pripravo obrokov iz sestavin, ki jih že imajo doma. Aplikacija poenostavlja načrtovanje obrokov, zmanjšuje zapravljanje hrane in prihrani čas, ki bi ga uporabnik porabil za iskanje ustreznih receptov.  
+Cilj projekta **Yummerz** je omogočiti uporabnikom enostavno in hitro pripravo obrokov iz sestavin, ki jih že imajo doma. Aplikacija poenostavlja načrtovanje obrokov, zmanjšuje zapravljanje hrane in prihrani čas, ki bi ga uporabnik porabil za iskanje ustreznih receptov, po spletu, to je namreč lahko zamudno saj moramo prečesati ogromno strani da najdemo recepte katere lahko prirpavimo z sestavinami, ki so nam v trenutku na voljo, še posebej če se nam mudi.  
 
 Namenjena je vsem, ki želijo jesti bolj načrtno, zdravo ali ekonomično, ne da bi se morali odpovedati raznolikosti in okusu.
 
