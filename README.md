@@ -101,7 +101,7 @@ Namenjena je vsem, ki želijo jesti bolj načrtno, zdravo ali ekonomično, ne da
 
 ## DPU
 
-![alt text](https://github.com/nikolajFERI/Yummerz/blob/main/dpu.drawio.png)
+![alt text](https://github.com/nikolajFERI/Yummerz/blob/main/dpu.png)
 
 ## Project layout
 
