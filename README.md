@@ -104,13 +104,39 @@ Namenjena je vsem, ki želijo jesti bolj načrtno, zdravo ali ekonomično, ne da
 ![alt text](https://github.com/nikolajFERI/Yummerz/blob/main/dpu.png)
 
 
-## Podroben opis primerov uporabe
-
 
 
 ## CLASS DIAGRAM
 
 ![alt text](https://github.com/nikolajFERI/Yummerz/blob/main/RisDiagram.png)
+
+
+### Opis razredov
+
+#### **Uporabnik**
+Razred **Uporabnik** predstavlja osnovnega uporabnika aplikacije. Uporabnik lahko ustvarja nove recepte ter določa in ureja svoje preference, ki vplivajo na priporočila in filtriranje vsebin v aplikaciji.
+
+#### **Vsebinski administrator**
+Razred **Vsebinski administrator** razširja funkcionalnosti razreda *Uporabnik*. Poleg vseh uporabniških pravic ima administrator možnost urejati in brisati recepte drugih uporabnikov, s čimer skrbi za kakovost in ustreznost vsebin v aplikaciji.
+
+#### **Recept**
+**Recept** je osrednji razred aplikacije. Vsebuje podatke, kot so naslov recepta, seznam sestavin in pripadajoči tagi. Recept je mogoče objaviti ali izvoziti v datoteko. Pred objavo lahko prehaja skozi različna stanja.
+
+#### **Preferenca**
+Razred **Preferenca** predstavlja uporabnikove prehranske in življenjske navade. Ključni elementi preferenc so izbrane sestavine ter opis življenjskega sloga. Sestavine lahko uporabnik izbere iz nabora že obstoječih sestavin, življenjski slog pa poljubno opiše.
+
+#### **Stanje**
+**Stanje** je enumeracija, ki določa vsa možna stanja recepta pred objavo (npr. osnutek, v pregledu, zavrnjen, pripravljen za objavo).
+
+#### **Tag**
+**Tag** predstavlja kratek opis ali kategorijo recepta. Uporablja se za označevanje tipa jedi, kuhinje ali drugih značilnosti recepta, kar olajša iskanje in filtriranje.
+
+#### **Sestavina**
+Razred **Sestavina** predstavlja posamezno sestavino recepta in uporabnikovih preferenc. Vsaka sestavina ima ime in ceno ter je ključen element pri sestavljanju receptov.
+
+
+
+
 
 | Primer uporabe: Ustvarjanje recepta                                                                                                                                                                                    | ID: 1 |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
