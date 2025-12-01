@@ -108,6 +108,10 @@ Namenjena je vsem, ki želijo jesti bolj načrtno, zdravo ali ekonomično, ne da
 
 
 
+## CLASS DIAGRAM
+
+![alt text](https://github.com/nikolajFERI/Yummerz/blob/main/RisDiagram.png)
+
 | Primer uporabe: Ustvarjanje recepta                                                                                                                                                                                    | ID: 1 |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
 | **Cilj:** Ustvariti nov recept z vsemi potrebnimi podatki.                                                                                                                                                             |       |
