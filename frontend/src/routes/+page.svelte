@@ -114,8 +114,9 @@
             </div>
 
         </form>
-            <FileUpload bind:this={fileInput} on:change={handleUpload}></FileUpload>
-        <br/> 
+                <br/> 
+
+        <FileUpload bind:this={fileInput} on:change={handleUpload}></FileUpload>
 
     </div>
 
@@ -140,7 +141,7 @@
                     <p>{recipe.instructions}</p>
                     <div class="recipe-actions">
                         <button on:click={() => handleEdit(recipe)}>Uredi</button>
-                        <button class="danger" on:click={() => deleteRecipe(recipe.id)}>Izbriši</button>
+                        <button class="danger" on:click={() => handleDelete(recipe.id)}>Izbriši</button>
                     </div>
                 </article>
             {/each}
