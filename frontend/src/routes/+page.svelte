@@ -2,6 +2,8 @@
     import { onMount } from 'svelte';
     import { fetchRecipes, createRecipe, updateRecipe, deleteRecipe, uploadMarkdown, type Recipe } from '$lib/services/recipe_api';
     import '$lib/styles/global.css'; 
+    import FileUpload from "../components/FileUploader.svelte";
+
 
     let recipes: Recipe[] = [];
     let name = '';
@@ -9,7 +11,8 @@
     let instructions = '';
     let editingRecipeId: number | null = null;
     let searchTerm = '';
-    let fileInput: HTMLInputElement;
+    let fileInput;
+    
 
     async function loadRecipes() {
         try {
@@ -37,6 +40,21 @@
             console.error(e);
             alert('Napaka pri shranjevanju.');
         }
+    }
+
+    async function handleUpload(){
+        const files = fileInput.getFiles();
+        for(const file of files){
+            try{
+                await uploadMarkdown(file);
+
+            }catch(e){
+                console.error(e);
+                alert('Napaka pri nalaganju');
+            }
+
+        };
+        loadRecipes();
     }
 
     async function handleDelete(id: number | undefined) {
@@ -91,8 +109,15 @@
                 {#if editingRecipeId}
                     <button type="button" on:click={resetForm}>Prekliči</button>
                 {/if}
+
+
             </div>
+
         </form>
+                <br/> 
+
+        <FileUpload bind:this={fileInput} on:change={handleUpload}></FileUpload>
+
     </div>
 
     <hr />
@@ -116,7 +141,7 @@
                     <p>{recipe.instructions}</p>
                     <div class="recipe-actions">
                         <button on:click={() => handleEdit(recipe)}>Uredi</button>
-                        <button class="danger" on:click={() => deleteRecipe(recipe.id)}>Izbriši</button>
+                        <button class="danger" on:click={() => handleDelete(recipe.id)}>Izbriši</button>
                     </div>
                 </article>
             {/each}
