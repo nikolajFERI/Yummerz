@@ -77,4 +77,31 @@ public class RecipeServiceTest {
             recipe.getInstructions().equals("Zmešaj in peci.")
         ));
     }
+
+    @Test
+    @DisplayName("returns empty on non existing id (bad)")
+    void updateRecipe_NonExistentId_ReturnsEmpty() {
+        Long invalidId = 99L;
+        Recipe newData = new Recipe();
+        when(recipeRepository.findById(invalidId)).thenReturn(Optional.empty());
+
+        Optional<Recipe> result = recipeService.updateRecipe(invalidId, newData);
+
+        Assertions.assertTrue(result.isEmpty());
+        verify(recipeRepository, never()).save(any()); // Preverimo, da se save NI poklical
+    }
+
+    // Delete test
+
+    @Test
+    @DisplayName("return true on delete")
+    void deleteRecipe_ExistingId_ReturnsTrue() {
+        Long id = 1L;
+        when(recipeRepository.existsById(id)).thenReturn(true);
+
+        boolean deleted = recipeService.deleteRecipe(id);
+
+        Assertions.assertTrue(deleted);
+        verify(recipeRepository).deleteById(id);
+    }
 }
