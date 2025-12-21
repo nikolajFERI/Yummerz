@@ -1,4 +1,4 @@
-package com.yummerz.yummerz;
+package com.yummerz.yummerz.recipe;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

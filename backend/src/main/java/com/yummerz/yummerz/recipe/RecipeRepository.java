@@ -1,4 +1,4 @@
-package com.yummerz.yummerz;
+package com.yummerz.yummerz.recipe;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
