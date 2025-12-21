@@ -22,8 +22,8 @@ Za ocenjevanje sva uporabila T-shirt sizes.
 
 
 Slika iz najine igre SCRUM-POKer:
-![alt text](https://github.com/nikolajFERI/Yummerz/blob/main/scrum_poker1.png)
-![alt text](https://github.com/nikolajFERI/Yummerz/blob/main/scrum_poker2.png)
+![alt text](https://github.com/Yummanians/Yummerz/blob/main/implementacija/scrum_poker1.png)
+![alt text](https://github.com/Yummanians/Yummerz/blob/main/implementacija/scrum_poker2.png)
 
 
 ## 4. Scrum tabla na GitHubu
