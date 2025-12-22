@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Service
 public class RecipeService {
@@ -17,33 +18,36 @@ public class RecipeService {
     @Autowired
     private RecipeRepository recipeRepository;
 
-    public Recipe createRecipe(Recipe recipe) {
-        return recipeRepository.save(recipe);
+    private String getCurrentUsername() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
     public List<Recipe> getAllRecipes(Optional<String> searchTerm) {
+        String currentUser = getCurrentUsername();
         if (searchTerm.isPresent() && !searchTerm.get().isBlank()) {
-            String query = searchTerm.get();
-            return recipeRepository.findByNameContainingIgnoreCaseOrIngredientsContainingIgnoreCaseOrInstructionsContainingIgnoreCase(query, query, query);
-        } else {
-            return recipeRepository.findAll();
+            return recipeRepository.searchMyRecipes(searchTerm.get(), currentUser);
         }
+        return recipeRepository.findAllByOwner(currentUser);
     }
 
+    public Recipe createRecipe(Recipe recipe) {
+        recipe.setOwner(getCurrentUsername()); // Tag the recipe with the owner
+        return recipeRepository.save(recipe);
+    }
     public Optional<Recipe> getRecipeById(Long id) {
         return recipeRepository.findById(id);
     }
 
-    public Optional<Recipe> updateRecipe(Long id, Recipe recipeDetails) {
+    public Optional<Recipe> updateRecipe(Long id, Recipe details) {
         return recipeRepository.findById(id)
-                .map(existingRecipe -> {
-                    existingRecipe.setName(recipeDetails.getName());
-                    existingRecipe.setIngredients(recipeDetails.getIngredients());
-                    existingRecipe.setInstructions(recipeDetails.getInstructions());
-                    return recipeRepository.save(existingRecipe);
+                .filter(r -> r.getOwner().equals(getCurrentUsername())) // SECURITY CHECK
+                .map(existing -> {
+                    existing.setName(details.getName());
+                    existing.setIngredients(details.getIngredients());
+                    existing.setInstructions(details.getInstructions());
+                    return recipeRepository.save(existing);
                 });
     }
-
     public boolean deleteRecipe(Long id) {
         if (recipeRepository.existsById(id)) {
             recipeRepository.deleteById(id);
@@ -58,7 +62,7 @@ public class RecipeService {
         StringBuilder ingredients = new StringBuilder();
         StringBuilder instructions = new StringBuilder();
         
-        String currentSection = ""; 
+        String currentSection = "";
 
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8))) {
@@ -84,6 +88,7 @@ public class RecipeService {
         }
 
         Recipe recipe = new Recipe();
+        recipe.setOwner(getCurrentUsername());
         recipe.setName(name);
         recipe.setIngredients(ingredients.toString().trim());
         recipe.setInstructions(instructions.toString().trim());

@@ -1,4 +1,7 @@
-const API_URL = 'http://localhost:8080/api/recipes';
+import { get } from 'svelte/store';
+import { token } from '../authStore';
+
+const BASE_URL = 'http://localhost:8080/api/recipes';
 
 export interface Recipe {
     id?: number;
@@ -7,43 +10,54 @@ export interface Recipe {
     instructions: string;
 }
 
-export async function fetchRecipes(searchTerm: string = ''): Promise<Recipe[]> {
-    const url = searchTerm ? `${API_URL}?search=${encodeURIComponent(searchTerm)}` : API_URL;
-    const response = await fetch(url);
-    if (!response.ok) throw new Error('Failed to fetch recipes');
-    return await response.json();
-}
+async function apiRequest(url: string, method = 'GET', body?: any) {
+    const jwt = get(token); // Get token from store
+    const headers: Record<string, string> = {
+        'Content-Type': 'application/json'
+    };
+    if (jwt) headers['Authorization'] = `Bearer ${jwt}`;
 
-export async function createRecipe(recipe: Recipe): Promise<void> {
-    const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(recipe)
+    const res = await fetch(url, {
+        method,
+        headers,
+        body: body ? JSON.stringify(body) : undefined
     });
-    if (!response.ok) throw new Error('Failed to create recipe');
+
+    if (res.status === 403 || res.status === 401) {
+        token.set(null); // Clear token if expired/unauthorized
+        throw new Error("Unauthorized");
+    }
+    return res;
 }
 
-export async function updateRecipe(id: number, recipe: Recipe): Promise<void> {
-    const response = await fetch(`${API_URL}/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(recipe)
-    });
-    if (!response.ok) throw new Error('Failed to update recipe');
+export async function fetchRecipes(search = ''): Promise<Recipe[]> {
+    const res = await apiRequest(`${BASE_URL}?search=${search}`);
+    return res.json();
 }
 
-export async function deleteRecipe(id: number): Promise<void> {
-    const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-    if (!response.ok) throw new Error('Failed to delete recipe');
+export async function createRecipe(recipe: Recipe) {
+    const res = await apiRequest(BASE_URL, 'POST', recipe);
+    return res.json();
 }
 
-export async function uploadMarkdown(file: File): Promise<void> {
+export async function updateRecipe(id: number, recipe: Recipe) {
+    const res = await apiRequest(`${BASE_URL}/${id}`, 'PUT', recipe);
+    return res.json();
+}
+
+export async function deleteRecipe(id: number) {
+    return apiRequest(`${BASE_URL}/${id}`, 'DELETE');
+}
+
+export async function uploadMarkdown(file: File) {
+    const jwt = get(token);
     const formData = new FormData();
     formData.append('file', file);
-    
-    const response = await fetch(`${API_URL}/import`, {
+
+    const res = await fetch(`${BASE_URL}/import`, {
         method: 'POST',
+        headers: { 'Authorization': `Bearer ${jwt}` },
         body: formData
     });
-    if (!response.ok) throw new Error('Failed to upload markdown');
+    return res;
 }

@@ -14,6 +14,11 @@ public class Recipe {
     private String name;
     private String ingredients;
     private String instructions;
+    private String owner;
+
+    public String getOwner() { return owner; }
+
+    public void setOwner(String owner) { this.owner = owner; }
 
     // Getters and Setters
     public Long getId() {
